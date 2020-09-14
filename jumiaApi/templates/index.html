@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+#myTable {
+  border-collapse: collapse;
+  width: 100%;
+  border: 1px solid #ddd;
+  font-size: 18px;
+}
+
+#myTable th, #myTable td {
+  text-align: left;
+  padding: 12px;
+}
+
+#myTable tr {
+  border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header, #myTable tr:hover {
+  background-color: #f1f1f1;
+}
+.form-inline {  
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.form-inline label {
+  margin: 5px 10px 5px 0;
+}
+
+.form-inline input {
+  vertical-align: middle;
+  margin: 5px 10px 5px 0;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.form-inline button {
+  padding: 10px 20px;
+  background-color: dodgerblue;
+  border: 1px solid #ddd;
+  color: white;
+  cursor: pointer;
+}
+
+.form-inline button:hover {
+  background-color: royalblue;
+}
+select#category {
+    height: 41px;
+}
+</style>
+</head>
+<body>
+
+<h2>jumia</h2>
+
+
+<form class="form-inline" action="/senddata" method="POST">
+    <input type="text" id="email" placeholder="What are you looking for ?" name="email">
+    <select name="category" id="category">
+        <option value="">--select--</option>
+        <option value="mobiles-smartphones">mobiles-smartphones</option>
+        <option value="tablettes">tablettes</option>
+        <option value="Téléphones & Tablettes">Téléphones & Tablettes</option>
+        <option value="accessoires-telephonie">accessoires-telephonie</option>
+      </select>
+    <button type="submit">Submit</button>
+  </form>
+  
+{% if data %}
+<table id="myTable">
+  <tr class="header">
+    <th>Product_name</th>
+    <th >Product_image</th>
+    <th >Product_details</th>
+    <th >Product_price</th>
+    <th >Product_url</th>
+    <th >Vender_name</th>
+    <th >Vender_location</th>
+    <th >Vender_contact</th>
+    <th >Site_name</th>
+    
+  </tr>
+  {% for o in data %}
+  <tr>
+    <td>{{ o.Product_name }}</td>
+    <td>{{ o.Product_image }}</td>
+    <td>{{ o.Product_details }}</td>
+    <td>{{ o.Product_price }}</td>
+    <td>{{ o.Product_url }}</td>
+    <td>{{ o.Vender_name }}</td>
+    <td>{{ o.Vender_location }}</td>
+    <td>{{ o.Vender_contact }}</td>
+    <td>{{ o.Site_name }}</td>
+  </tr>
+  {% endfor %}
+  
+</table>
+{% endif %}
+
+</body>
+</html>
