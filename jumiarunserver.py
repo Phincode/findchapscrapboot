@@ -6,7 +6,7 @@ from os import environ
 from jumiaApi import app
 
 if __name__ == '__main__':
-    HOST = environ.get('SERVER_HOST', '0.0.0.0')
+    HOST = environ.get('SERVER_HOST', '127.0.0.1')
     try:
         PORT = int(environ.get('SERVER_PORT', '5400'))
     except ValueError:

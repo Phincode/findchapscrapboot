@@ -22,9 +22,9 @@ app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 config = {
   'user': 'root',
-  'password': 'Tas{T~tas@Trident615Noida_one_ami}',
-  'host': '68.66.205.156',
-  'database': 'jumia',
+  'password': 'mysql',
+  'host': 'localhost',
+  'database': 'findchap',
   'raise_on_warnings': True,
 }
 
@@ -52,7 +52,7 @@ def senddata():
         connection = mysql.connector.connect(**config)
         connection.autocommit = True
         cursor = connection.cursor(dictionary=True)
-        cursor.execute('delete from searchdata')
+        cursor.execute('TRUNCATE  searchdata')
         for one_data in join_data:
             if '✔' in one_data['Product_name']:
                 Product_name = one_data['Product_name'].replace('✔','')
@@ -78,5 +78,5 @@ def senddata():
         return jsonify(apiResponse('200','Success',{'jumia_deals':jumiadeals,'jumia_ci':jumiaci}))
         # return render_template('index.html',data=data)
     except Exception as e:
-        print(str(e))
+        print("Error:"+str(e))
         return jsonify(apiResponse('201','Some internal error occurs',responseData=[]))
