@@ -21,10 +21,10 @@ import schedule
 app.secret_key = 'A0Zr98j/3yX R~XHH!jmN]LWX/,?RT'
 
 config = {
-  'user': 'root',
-  'password': 'mysql',
-  'host': 'localhost',
-  'database': 'findchap',
+  'user': 'cchap',
+  'password': '9#ulJs64',
+  'host': '163.172.192.138',
+  'database': 'apicchap',
   'raise_on_warnings': True,
 }
 
