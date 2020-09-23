@@ -1,1 +1,1 @@
-web: gunicorn jumiarunserver:app
+web: gunicorn jumiarunserver:app --timeout 1200
