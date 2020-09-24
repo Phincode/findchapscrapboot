@@ -64,9 +64,9 @@ def senddata():
 
         data = []
         data1 = []
-        cursor.execute('select * from searchdata where Site_name="deals.jumia.ci" limit 10')
+        cursor.execute('select * from searchdata where Site_name="deals.jumia.ci"')
         data = cursor.fetchall()
-        cursor.execute('select * from searchdata where Site_name="www.jumia.ci" limit 10')
+        cursor.execute('select * from searchdata where Site_name="www.jumia.ci"')
         data1 = cursor.fetchall()
         cursor.close()
         connection.close()
