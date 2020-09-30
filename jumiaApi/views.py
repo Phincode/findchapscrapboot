@@ -44,8 +44,9 @@ def senddata():
         category = request.args['categorys']
         if category == '' or category == None:
             category = 'catalog'
-        all_data_deals = scrapdatadeals(category,keyword)
+        all_data_deals =[] #scrapdatadeals(category,keyword)
         all_data_ = scrapdatajumia(keyword)
+        print("================ Etapes scrap ok=============")
         all_deald_data = all_data_deals if all_data_deals else []
         all_ci_data = all_data_ if all_data_ else []
         join_data =  all_deald_data + all_ci_data
@@ -64,14 +65,15 @@ def senddata():
 
         data = []
         data1 = []
-        cursor.execute('select * from searchdata where Site_name="deals.jumia.ci"')
+        cursor.execute('select * from searchdata where Site_name="deals.jumia.ci" limit 10')
         data = cursor.fetchall()
-        cursor.execute('select * from searchdata where Site_name="www.jumia.ci"')
+        cursor.execute('select * from searchdata where Site_name="www.jumia.ci" limit 10')
         data1 = cursor.fetchall()
         cursor.close()
         connection.close()
+        jumiadeals=[]
         if data:
-            jumiadeals = sorted(data, key = lambda i: eval(i['Product_price']),reverse=True)
+            jumiadeals=[] #sorted(data, key = lambda i: eval(i['Product_price']),reverse=True)
         if data1:
             jumiaci = sorted(data1, key = lambda i: eval(i['Product_price']),reverse=True)
         

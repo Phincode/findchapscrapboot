@@ -60,7 +60,7 @@ def scrapdatadeals(category,keyword):
                     'Vender_contact':Vender_contact,
                     'Site_name':Site_name
                     })
-                time.sleep(2)
+                #time.sleep(2)
             except Exception as e:
                 print(str(e))
                 pass
