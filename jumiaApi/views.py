@@ -2,6 +2,7 @@
 #from datetime import datetime
 from flask import render_template
 from jumiaApi import app
+import traceback 
 import mysql.connector
 import io
 import csv
@@ -41,9 +42,14 @@ config = {
 def senddata():
     try:
         keyword = request.args['keywords']
-        category = request.args['categorys']
-        if category == '' or category == None:
-            category = 'catalog'
+        print(keyword)
+        if '' in keyword:
+            print("ok++ok")
+            keyword=keyword.replace(" ", "+")
+            print(keyword)
+        #category = request.args['categorys']
+        #if category == '' or category == None:
+          #  category = 'catalog'
         all_data_deals =[] #scrapdatadeals(category,keyword)
         all_data_ = scrapdatajumia(keyword)
         print("================ Etapes scrap ok=============")
@@ -65,9 +71,9 @@ def senddata():
 
         data = []
         data1 = []
-        cursor.execute('select * from searchdata where Site_name="deals.jumia.ci" limit 10')
-        data = cursor.fetchall()
-        cursor.execute('select * from searchdata where Site_name="www.jumia.ci" limit 10')
+        #cursor.execute('select * from searchdata where Site_name="deals.jumia.ci" limit 10')
+        #data = cursor.fetchall()
+        cursor.execute('select * from searchdata where Site_name="www.jumia.ci" ORDER BY Product_price ASC')
         data1 = cursor.fetchall()
         cursor.close()
         connection.close()
@@ -75,10 +81,10 @@ def senddata():
         if data:
             jumiadeals=[] #sorted(data, key = lambda i: eval(i['Product_price']),reverse=True)
         if data1:
-            jumiaci = sorted(data1, key = lambda i: eval(i['Product_price']),reverse=True)
-        
+            jumiaci = data1
         return jsonify(apiResponse('200','Success',{'jumia_deals':jumiadeals,'jumia_ci':jumiaci}))
         # return render_template('index.html',data=data)
     except Exception as e:
         print("Error:"+str(e))
+        traceback.print_exc()
         return jsonify(apiResponse('201','Some internal error occurs',responseData=[]))

@@ -80,7 +80,7 @@ def scrapdatajumia(keyword):
             'Accept-Language': 'en-US,en;q=0.9'
         }
         
-        url = ss.get('https://www.jumia.ci/catalog/?q='+keyword,headers = frist_headers,verify=False)
+        url = ss.get("https://www.jumia.ci/catalog/?q="+keyword,headers = frist_headers,verify=False)
         soup = BeautifulSoup(url.text,'lxml')
         all_article = soup.findAll('article')
         all_data = []
@@ -89,7 +89,7 @@ def scrapdatajumia(keyword):
                 if article.find('img'):
                     try:
                         Product_name = article.find('div',{'class':'info'}).find('h3').text
-                        Product_price = article.find('div',{'class':'info'}).find('div').text.split(' ')[0]
+                        Product_price =int(article.find('div',{'class':'info'}).find('div',{'class':'prc'}).text.replace('FCFA','').strip().replace(',','').strip())
                         Product_details = article.find('div',{'class':'info'}).find('h3').text
                         Product_image = article.find('img')['data-src']
                         Product_url = 'https://www.jumia.ci'+article.find('a')['href']
